@@ -1,0 +1,44 @@
+import math
+
+def calculate_bisector(a, b, c):
+    """Вычисляет длину биссектрисы, проведенной к стороне c."""
+
+    # Проверка на существование треугольника
+    if not (a + b > c and a + c > b and b + c > a):
+        raise ValueError("Треугольник с такими сторонами не существует.")
+
+    # Формула для длины биссектрисы
+    p = (a + b + c) / 2  # Полупериметр
+    l_c = (2 * a * b * (p - c) / (a + b))**0.5
+    return l_c
+
+
+def main():
+    # Разносторонний треугольник
+    a, b, c = 5, 6, 7
+    try:
+      l_c = calculate_bisector(a, b, c)
+      print(f"Разносторонний треугольник (a={a}, b={b}, c={c}): Длина биссектрисы к стороне c: {l_c:.2f}")
+    except ValueError as e:
+      print(e)
+
+
+    # Равнобедренный треугольник
+    a, b, c = 5, 5, 6
+    try:
+      l_c = calculate_bisector(a, b, c)
+      print(f"Равнобедренный треугольник (a={a}, b={b}, c={c}): Длина биссектрисы к стороне c: {l_c:.2f}")
+    except ValueError as e:
+      print(e)
+
+    # Остроугольный треугольник (проверка на остроугольность не нужна, т.к. формула работает для всех треугольников)
+    a, b, c = 4, 5, 6
+    try:
+      l_c = calculate_bisector(a, b, c)
+      print(f"Остроугольный треугольник (a={a}, b={b}, c={c}): Длина биссектрисы к стороне c: {l_c:.2f}")
+    except ValueError as e:
+      print(e)
+
+
+if __name__ == "__main__":
+    main()
