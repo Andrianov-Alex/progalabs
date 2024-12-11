@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+int main() {
+  double a, b, c;
+
+  printf("Введите длины сторон треугольника (a, b, c): ");
+  scanf("%lf %lf %lf", &a, &b, &c);
+
+  // Проверка на существование треугольника (неравенство треугольника)
+  if (a + b <= c || a + c <= b || b + c <= a) {
+    printf("Треугольник с такими сторонами не существует.\n");
+    return 1; // Возвращаем 1, указывая на ошибку
+  }
+
+  // Находим минимальную и максимальную стороны
+  double min_side = a;
+  double max_side = a;
+  if (b < min_side) min_side = b;
+  if (c < min_side) min_side = c;
+  if (b > max_side) max_side = b;
+  if (c > max_side) max_side = c;
+
+
+  double ratio = min_side / max_side;
+
+  printf("Отношение высот, проведенных к большей и меньшей сторонам: %.2lf\n", ratio);
+
+  return 0;
+}
