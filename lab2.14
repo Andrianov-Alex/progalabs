@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+
+struct Point {
+    double x, y;
+};
+
+double cross_product(Point O, Point A, Point B) {
+    return (A.x - O.x) * (B.y - O.y) - (A.y - O.y) * (B.x - O.x);
+}
+
+bool is_convex(std::vector<Point>& polygon) {
+    int n = polygon.size();
+    if (n < 4) return false; // Не четырехугольник
+
+    bool is_clockwise = cross_product(polygon[0], polygon[1], polygon[2]) > 0;
+
+    for (int i = 1; i < n; ++i) {
+        double cp = cross_product(polygon[i], polygon[(i + 1) % n], polygon[(i + 2) % n]);
+        if ((is_clockwise && cp < 0) || (!is_clockwise && cp > 0)) {
+            return false; // Невыпуклый
+        }
+    }
+    return true; // Выпуклый
+}
+
+int main() {
+    std::vector<Point> polygon = {
+        {1, 1}, {2, 2}, {3, 3}, {4, 4}  // Эти точки лежат на одной прямой
+    };
+
+    if (is_convex(polygon)) {
+        std::cout << "Четырехугольник выпуклый." << std::endl;
+    } else {
+        std::cout << "Четырехугольник невыпуклый." << std::endl;
+    }
+
+    // Пример с выпуклым четырехугольником:
+    std::vector<Point> convex_polygon = {
+        {1, 1}, {4, 1}, {4, 4}, {1, 4}
+    };
+
+    if (is_convex(convex_polygon)) {
+        std::cout << "Четырехугольник выпуклый." << std::endl;
+    } else {
+        std::cout << "Четырехугольник невыпуклый." << std::endl;
+    }
+
+    return 0;
+}
+
