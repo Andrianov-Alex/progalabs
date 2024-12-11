@@ -1,0 +1,27 @@
+def get_japanese_year_name(year):
+    """Возвращает название года по старояпонскому календарю."""
+
+    colors = ["зеленый", "красный", "желтый", "белый", "черный", "зеленый", "красный", "желтый", "белый", "черный", "зеленый", "красный"]
+    animals = ["крыса", "корова", "тигр", "заяц", "дракон", "змея", "лошадь", "овца", "обезьяна", "курицы", "собака", "свинья"]
+
+    # Находим номер цикла и года внутри цикла
+    cycle_number = (year - 1984) // 60  # Целочисленное деление
+    year_in_cycle = (year - 1984) % 60
+    color_index = year_in_cycle // 12
+    animal_index = year_in_cycle % 12
+
+
+    if year < 1984:
+        diff = 1984 - year
+        cycle_number = (1984-diff - 1984) // 60
+        year_in_cycle = (1984-diff - 1984) % 60
+        color_index = year_in_cycle // 12
+        animal_index = year_in_cycle % 12
+
+    
+    return f"Год {colors[color_index]} {animals[animal_index]}"
+
+
+if __name__ == "__main__":
+    year = int(input("Введите год: "))
+    print(get_japanese_year_name(year))
