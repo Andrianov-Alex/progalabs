@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+char* getCardRank(int cardNumber) {
+  if (cardNumber >= 2 && cardNumber <= 10) {
+    char rank[3]; // выделяем память под число и нуль-терминатор
+    sprintf(rank, "%d", cardNumber); //преобразуем число в строку
+    return rank; //Возвращаем строку
+  } else if (cardNumber == 11) {
+    return "Валет";
+  } else if (cardNumber == 12) {
+    return "Дама";
+  } else if (cardNumber == 13) {
+    return "Король";
+  } else if (cardNumber == 14) {
+    return "Туз";
+  } else {
+    return "Неверный номер карты";
+  }
+}
+
+int main() {
+  int cardNumber;
+
+  printf("Введите порядковый номер карты (2-14): ");
+  scanf("%d", &cardNumber);
+
+  char* rank = getCardRank(cardNumber);
+  printf("Достоинство карты: %s\n", rank);
+
+  return 0;
+}
+
