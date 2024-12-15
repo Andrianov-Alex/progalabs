@@ -1,0 +1,40 @@
+#include <iostream>
+#include <limits> // Для numeric_limits
+#include <cmath> // для fabs
+
+
+double f(double x) {
+    return 3 * x * x + x - 4;
+}
+
+int main() {
+    double a, b, h = 0.1;
+
+    std::cout << "Введите начало интервала (a): ";
+    std::cin >> a;
+    std::cout << "Введите конец интервала (b): ";
+    std::cin >> b;
+
+    if (a > b) {
+        std::swap(a, b); // гарантируем что a <= b
+    }
+
+    double min_y = std::numeric_limits<double>::infinity();
+    double max_y = -std::numeric_limits<double>::infinity();
+
+    double x = a;
+    while (x <= b) {
+        double y = f(x);
+        if (y < min_y) min_y = y;
+        if (y > max_y) max_y = y;
+        x += h;
+      //Проверка на точность, чтобы избежать проблем с плавающей точкой
+        if (fabs(x - b) < 1e-9 && x < b) x = b;
+
+    }
+
+    std::cout << "Наименьшее значение функции: " << min_y << std::endl;
+    std::cout << "Наибольшее значение функции: " << max_y << std::endl;
+
+    return 0;
+}
