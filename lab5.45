@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+long long factorial(int n) {
+  if (n < 0) {
+    return -1; // Ошибка: факториал отрицательного числа не определен
+  } else if (n == 0) {
+    return 1; // Факториал 0 равен 1
+  } else {
+    long long result = 1;
+    int i = 1;
+    while (i <= n) {
+      result *= i;
+      i++;
+    }
+    return result;
+  }
+}
+
+int main() {
+  int n;
+
+  printf("Введите значение n (n > 0): ");
+  scanf("%d", &n);
+
+  if (n <= 0) {
+    printf("Ошибка: n должно быть больше 0.\n");
+    return 1; // Возвращаем код ошибки
+  }
+
+  long long fact_2n = factorial(2 * n);
+
+  if (fact_2n == -1) {
+    printf("Ошибка вычисления факториала.\n");
+  } else {
+    printf("Факториал (2n)! = %lld\n", fact_2n);
+  }
+
+  return 0;
+}
