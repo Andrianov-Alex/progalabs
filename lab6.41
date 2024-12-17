@@ -1,0 +1,22 @@
+def find_numbers_with_sum_of_digits(sum_digits):
+    numbers = []
+    num = 100
+    while num <= 999:
+        sum_current = sum(map(int, str(num)))
+        if sum_current == sum_digits:
+            numbers.append(num)
+        num += 1
+    return numbers
+
+
+if __name__ == "__main__":
+    try:
+        sum_digits = int(input("Введите сумму цифр: "))
+        if sum_digits < 1 or sum_digits > 27:  # Максимальная сумма цифр трехзначного числа 27
+            print("Сумма цифр должна быть в диапазоне от 1 до 27.")
+        else:
+            result = find_numbers_with_sum_of_digits(sum_digits)
+            print(f"Трехзначные числа с суммой цифр {sum_digits}: {result}")
+    except ValueError:
+        print("Ошибка: введите целое число.")
+
