@@ -1,0 +1,13 @@
+#include <iostream>
+
+int main() {
+    int num = 2;
+    do {
+        if (num % 2 == 0 || num % 3 == 0) {
+            std::cout << num << " ";
+        }
+        num++;
+    } while (num <= 120);
+    std::cout << std::endl;
+    return 0;
+}
