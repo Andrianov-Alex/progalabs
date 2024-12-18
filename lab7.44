@@ -1,0 +1,36 @@
+def find_duplicate_indices(arr):
+    counts = {}  # Словарь для подсчета вхождений элементов
+    indices = {}  # Словарь для хранения индексов элементов
+
+    for i, num in enumerate(arr):
+        if num in counts:
+            counts[num] += 1
+            indices[num].append(i)
+        else:
+            counts[num] = 1
+            indices[num] = [i]
+
+
+    for num, count in counts.items():
+        if count == 2:
+            return sorted(indices[num]) # возвращаем отсортированный список индексов
+
+    return None  # Одинаковых элементов нет
+
+
+if __name__ == "__main__":
+    try:
+        n = int(input("Введите размер массива: "))
+        arr = list(map(int, input("Введите элементы массива через пробел: ").split()))
+
+        if len(arr) != n:
+            print("Ошибка: количество элементов не соответствует размеру массива.")
+        else:
+            duplicate_indices = find_duplicate_indices(arr)
+            if duplicate_indices:
+                print("Индексы одинаковых элементов:", duplicate_indices)
+            else:
+                print("В массиве нет двух одинаковых элементов.")
+    except ValueError:
+        print("Ошибка: введите целые числа.")
+
