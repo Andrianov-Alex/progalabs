@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <limits.h>
+
+int main() {
+    int n;
+
+    printf("Введите размер массива N: ");
+    scanf("%d", &n);
+
+    if (n <= 1) {
+        printf("Размер массива должен быть больше 1.\n");
+        return 1; // Возвращаем код ошибки
+    }
+
+    int arr[n];
+    printf("Введите элементы массива:\n");
+    for (int i = 0; i < n; ++i) {
+        scanf("%d", &arr[i]);
+    }
+
+    int max_sum = INT_MIN; // Инициализируем наименьшим возможным значением
+    int max_sum_index1 = -1;
+    int max_sum_index2 = -1;
+
+    for (int i = 0; i < n - 1; ++i) {
+        int current_sum = arr[i] + arr[i + 1];
+        if (current_sum > max_sum) {
+            max_sum = current_sum;
+            max_sum_index1 = i;
+            max_sum_index2 = i + 1;
+        }
+    }
+
+    if (max_sum_index1 == -1) {
+        printf("Ошибка: массив слишком мал.\n");
+        return 1;
+    }
+
+    printf("Два соседних элемента с максимальной суммой:\n");
+    printf("Элемент с индексом %d: %d\n", max_sum_index1, arr[max_sum_index1]);
+    printf("Элемент с индексом %d: %d\n", max_sum_index2, arr[max_sum_index2]);
+
+    return 0;
+}
