@@ -1,0 +1,44 @@
+def find_row_with_max_sum(matrix):
+    """Находит номер строки с наибольшей суммой элементов."""
+
+    if not matrix:
+        return None, None  
+    max_sum = float('-inf')  
+    max_sum_row_index = -1
+
+    for i, row in enumerate(matrix):
+        row_sum = sum(row)
+        if row_sum > max_sum:
+            max_sum = row_sum
+            max_sum_row_index = i
+
+    return max_sum_row_index, max_sum
+
+
+if __name__ == "__main__":
+    try:
+        m = int(input("Введите количество строк: "))
+        n = int(input("Введите количество столбцов: "))
+
+        matrix = []
+        print("Введите элементы матрицы построчно (через пробел):")
+        for i in range(m):
+            row = list(map(int, input().split()))
+            if len(row) != n:
+                raise ValueError("Некорректный размер строки.")
+            matrix.append(row)
+
+
+        max_sum_row_index, max_sum = find_row_with_max_sum(matrix)
+
+        if max_sum_row_index is not None:
+            print(f"Номер строки с наибольшей суммой элементов: {max_sum_row_index}")
+            print(f"Наибольшая сумма элементов: {max_sum}")
+        else:
+            print("Матрица пуста.")
+
+    except ValueError as e:
+        print(f"Ошибка: {e}")
+    except Exception as e:
+        print(f"Произошла непредвиденная ошибка: {e}")
+
