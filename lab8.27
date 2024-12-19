@@ -1,0 +1,52 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main() {
+    int n, m;
+
+    cout << "Введите количество строк (N): ";
+    cin >> n;
+    cout << "Введите количество столбцов (M): ";
+    cin >> m;
+
+    if (n <= 0 || m <= 0) {
+        cout << "Количество строк и столбцов должно быть больше 0." << endl;
+        return 1; // Возвращаем код ошибки
+    }
+
+    vector<vector<int>> matrix(n, vector<int>(m));
+
+    cout << "Введите элементы матрицы:" << endl;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    for (int i = 0; i < n; ++i) {
+        bool has_negative = false;
+        for (int j = 0; j < m; ++j) {
+            if (matrix[i][j] < 0) {
+                has_negative = true;
+                break; 
+            }
+        }
+        if (has_negative) {
+            for (int j = 0; j < m; ++j) {
+                matrix[i][j] = 0;
+            }
+        }
+    }
+
+    cout << "Измененная матрица:" << endl;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < m; ++j) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
